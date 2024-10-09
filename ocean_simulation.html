@@ -5,17 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocean Water Simulation</title>
     <style>
-        body { margin: 0; overflow: hidden; }
+        body { margin: 0; overflow: hidden; background-color: #87CEEB; }
         #choppinessSlider {
             position: absolute;
             top: 10px;
             left: 10px;
             z-index: 100;
         }
+        #loadingMessage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <input type="range" id="choppinessSlider" min="0" max="1" step="0.01" value="0.5">
+    <div id="loadingMessage">Ocean simulation should appear here. If not, check the console for errors.</div>
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js';
         import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/controls/OrbitControls.js';
@@ -25,6 +35,8 @@
         let scene, camera, renderer, water, sun, sky;
 
         function init() {
+            try {
+                console.log("Initializing scene...");
             // Create scene
             scene = new THREE.Scene();
 
@@ -130,6 +142,33 @@
 
         // Initialize the scene
         init();
+            } catch (error) {
+                console.error("Error initializing scene:", error);
+            }
+        }
+
+        // Handle window resize
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener('resize', onWindowResize);
+
+        // Initialize the scene
+        init();
+    </script>
+    <script>
+        window.addEventListener('load', function() {
+            console.log("Window loaded");
+            if (typeof THREE === 'undefined') {
+                console.error("THREE is not defined. Make sure Three.js is loaded correctly.");
+            }
+            if (document.body.children.length <= 2) {
+                console.error("Renderer canvas not added to the document. Check if renderer.domElement is appended correctly.");
+            }
+        });
     </script>
 </body>
 </html>
