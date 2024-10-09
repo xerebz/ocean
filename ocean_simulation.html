@@ -27,10 +27,10 @@
     <input type="range" id="choppinessSlider" min="0" max="1" step="0.01" value="0.5">
     <div id="loadingMessage">Ocean simulation should appear here. If not, check the console for errors.</div>
     <script type="module">
-        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js';
-        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/controls/OrbitControls.js';
-        import { Water } from 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/objects/Water.js';
-        import { Sky } from 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/objects/Sky.js';
+        import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+        import { OrbitControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
+        import { Water } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/objects/Water.js';
+        import { Sky } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/objects/Sky.js';
 
         let scene, camera, renderer, water, sun, sky;
 
